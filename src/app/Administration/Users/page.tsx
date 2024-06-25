@@ -18,4 +18,6 @@ const statusColorMap = {
   vacation: "warning",
 };
 
-export default function Users() {}
+export default function Users() {
+  console.log("amdjed");
+}
