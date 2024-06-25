@@ -10,10 +10,12 @@ import { UserDetails } from "../utils/types";
 
 const Page = () => {
   const router = useRouter();
+
   const { isLogedIn, setIsLogedIn, user, setUser } = useAppContext();
+  if (user && isLogedIn) {
+    router.push("/Products");
+  }
   useEffect(() => {
-    console.log("user", user);
-    console.log(isLogedIn);
     window.localStorage.setItem("user", JSON.stringify(user));
   }, [user, isLogedIn]);
 
@@ -132,7 +134,7 @@ const Page = () => {
           <div className="flex items-center justify-between">
             <p className="text-sm text-gray-500">
               No account?
-              <Link className="underline text-primary" href="/SignUp">
+              <Link className="underline text-primary" href="/SigneUp">
                 Sign up
               </Link>
             </p>

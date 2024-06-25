@@ -1,6 +1,13 @@
 "use client";
-import { createContext, useContext, useState, ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  useEffect,
+} from "react";
 import { UserDetails } from "@/app/utils/types";
+import jwt from "jsonwebtoken";
 interface Product {
   id: number;
   name: string;

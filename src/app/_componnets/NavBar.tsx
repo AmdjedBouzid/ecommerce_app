@@ -8,7 +8,9 @@ import axios from "axios";
 import { useAppContext } from "@/context/login";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import useFetchUser from "@/app/utils/usehot";
 export default function NavBar() {
+  useFetchUser();
   const router = useRouter();
   const { user, setUser, isLogedIn, setIsLogedIn } = useAppContext();
 

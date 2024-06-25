@@ -44,6 +44,7 @@ export default function Home() {
     if (user !== null) {
       setUser(JSON.parse(user));
       setIsLogedIn(true);
+      router.refresh();
     } else {
       getUserDetails();
     }
