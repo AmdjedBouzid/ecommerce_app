@@ -22,10 +22,10 @@ const Page = () => {
   const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN1;
 
   const handleLogout = () => {
+    router.push("/Login");
     localStorage.removeItem("Token");
     setUser(null);
     setIsLogedIn(false);
-    router.push("/Login");
   };
 
   const token =
@@ -91,7 +91,8 @@ const Page = () => {
       );
 
       if (response.status === 200) {
-        const updatedUser = response.data.UserApdated;
+        const updatedUser = response.data.UserUpdated;
+        // console.log("user apdated", response.data.UserUpdated);
         setUser(updatedUser);
         console.log(user);
         setImagePreview(null);

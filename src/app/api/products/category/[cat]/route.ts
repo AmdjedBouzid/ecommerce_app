@@ -3,7 +3,7 @@ import connection from "@/app/config/db";
 
 /**
  * @method GET
- * @route http://localhost:3000/api/products/[id]
+ * @route http://localhost:3000/api/category/[cat]
  * @description GET product by id
  * @access private
  */
@@ -11,6 +11,7 @@ interface params {
   cat: string;
 }
 export async function GET(request: NextRequest, { params }: any) {
+  var db;
   try {
     if (!params.cat) {
       return NextResponse.json(
@@ -19,8 +20,8 @@ export async function GET(request: NextRequest, { params }: any) {
       );
     }
     //id
-    const db = await connection.getConnection();
-    const [product] = await db.query(
+    db = await connection.getConnection();
+    const [product]: any = await db.query(
       "SELECT * FROM product WHERE category = ?",
       [params.cat]
     );
@@ -40,5 +41,9 @@ export async function GET(request: NextRequest, { params }: any) {
       { error: "Failed to fetch product" },
       { status: 500 }
     );
+  } finally {
+    if (db) {
+      db.release();
+    }
   }
 }

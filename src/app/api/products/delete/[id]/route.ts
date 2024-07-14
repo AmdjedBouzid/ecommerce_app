@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import connection from "@/app/config/db";
 import { verifyToken } from "@/app/utils/verifyToken";
-import { Jwtpaylod } from "@/app/utils/types";
+import { UserDetails, UserToken } from "@/app/utils/types";
 import jwt from "jsonwebtoken";
 import { boolean } from "zod";
 /**
@@ -11,6 +11,7 @@ import { boolean } from "zod";
  * @access private
  */
 export async function DELETE(request: NextRequest, { params }: any) {
+  var db;
   try {
     if (!params.id) {
       return NextResponse.json(
@@ -28,7 +29,7 @@ export async function DELETE(request: NextRequest, { params }: any) {
 
     // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjYsImVtYWlsIjoiYW1kamVkM0BnbWFpbC5jb20iLCJpc0FkbWluIjowLCJwYXNzd29yZCI6IiQyYSQxMCR5bjZGM3pWL3loQS5jRnZ3OG03OUh1VjFienZ4cTJmR0FpbVgyR1Q3SzVRY3RmcWtidTdYdSIsImlhdCI6MTcxNzk4MDgzNiwiZXhwIjoxNzE5NzA4ODM2fQ.8q58Q_hCDq-kQEP53m9xHS1KCBdeJvOlhb49SoOkDzw
     const token = authHeader.split(" ")[1];
-    const decoded = jwt.verify(token, "amdjedamdjed05062004") as Jwtpaylod;
+    const decoded = jwt.verify(token, "amdjedamdjed05062004") as UserToken;
     if (!decoded.isAdmin) {
       return NextResponse.json(
         { message: " you are not admin" },
@@ -36,7 +37,7 @@ export async function DELETE(request: NextRequest, { params }: any) {
       );
     }
 
-    const db = await connection.getConnection();
+    db = await connection.getConnection();
 
     const [products]: any = await db.query(
       `SELECT * FROM product WHERE id = ?`,
@@ -61,5 +62,9 @@ export async function DELETE(request: NextRequest, { params }: any) {
       { error: "Failed to delete product" },
       { status: 500 }
     );
+  } finally {
+    if (db) {
+      db.release();
+    }
   }
 }

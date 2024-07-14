@@ -4,7 +4,7 @@ import { Login } from "@/app/utils/validation";
 import connection from "@/app/config/db";
 import bcrypt from "bcryptjs";
 import { jeneratejwt } from "@/app/utils/jenerateToken";
-import { Jwtpaylod, UserDetails } from "@/app/utils/types";
+import { UserDetails, UserToken } from "@/app/utils/types";
 /**
  * @method POST
  * @route http://localhost:3000/api/users/login
@@ -12,9 +12,10 @@ import { Jwtpaylod, UserDetails } from "@/app/utils/types";
  * @access Public
  */
 export async function POST(request: NextRequest) {
+  var db;
   try {
     // Get a connection to the database
-    const db = await connection.getConnection();
+    db = await connection.getConnection();
 
     // Parse the JSON body from the request
     const body = await request.json();
@@ -38,11 +39,16 @@ export async function POST(request: NextRequest) {
       const password: string = user.password;
 
       // Create a JWT payload
-      const jwtPayloadUser: Jwtpaylod = {
+      const jwtPayloadUser: UserToken = {
         id: user.id,
         email: user.email,
         isAdmin: user.isAdmin,
-        password: user.password,
+
+        phone_number: user.phone_number,
+
+        name: user.name,
+
+        IsSuperAdmin: user.IsSuperAdmin,
       };
 
       // Generate a JWT
@@ -63,6 +69,7 @@ export async function POST(request: NextRequest) {
           id_list: user.id_list,
           name: user.name,
           Bio: user.Bio,
+          IsSuperAdmin: user.IsSuperAdmin,
         };
         return NextResponse.json(
           { message: "Login successfully", token, UserReturn },
@@ -89,5 +96,9 @@ export async function POST(request: NextRequest) {
       { message: "Internal server error" },
       { status: 500 }
     );
+  } finally {
+    if (db) {
+      db.release();
+    }
   }
 }

@@ -1,7 +1,7 @@
 import { NextResponse, NextRequest } from "next/server";
 import connection from "@/app/config/db";
 import jwt from "jsonwebtoken";
-import { Jwtpaylod } from "@/app/utils/types";
+import { UserDetails, UserToken } from "@/app/utils/types";
 import { cookies } from "next/headers";
 /**
  * @method PUT
@@ -10,7 +10,7 @@ import { cookies } from "next/headers";
  * @access private
  */
 export async function PUT(request: NextRequest) {
-  const db = await connection.getConnection();
+  var db = await connection.getConnection();
   const body = await request.json();
 
   const authHeader = request.headers.get("Authorization");
@@ -23,10 +23,14 @@ export async function PUT(request: NextRequest) {
   let decoded;
 
   try {
-    decoded = jwt.verify(token, "amdjedamdjed05062004") as Jwtpaylod;
+    decoded = jwt.verify(token, "amdjedamdjed05062004") as UserToken;
     console.log(decoded);
   } catch (error) {
     return NextResponse.json({ message: "Invalid token" }, { status: 400 });
+  } finally {
+    if (db) {
+      db.release();
+    }
   }
 
   if (!decoded.isAdmin) {
@@ -75,5 +79,9 @@ export async function PUT(request: NextRequest) {
       { message: "Failed to update product" },
       { status: 500 }
     );
+  } finally {
+    if (db) {
+      db.release();
+    }
   }
 }

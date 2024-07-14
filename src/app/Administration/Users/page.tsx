@@ -1,23 +1,11 @@
+"use client";
 import React from "react";
-import {
-  Table,
-  TableHeader,
-  TableColumn,
-  TableBody,
-  TableRow,
-  TableCell,
-  User,
-  Chip,
-  Tooltip,
-  getKeyValue,
-} from "@nextui-org/react";
-
-const statusColorMap = {
-  active: "success",
-  paused: "danger",
-  vacation: "warning",
-};
+import TableUsers from "../_administrationComponnets/TableUsers";
 
 export default function Users() {
-  console.log("amdjed");
+  return (
+    <div style={{ padding: "20px" }}>
+      <TableUsers />
+    </div>
+  );
 }

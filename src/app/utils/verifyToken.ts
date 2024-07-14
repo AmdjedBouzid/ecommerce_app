@@ -2,13 +2,13 @@
 import { request } from "http";
 import jwt from "jsonwebtoken";
 import { NextRequest, NextResponse } from "next/server";
-import { Jwtpaylod, isLoginUserType } from "@/app/utils/types";
+import { UserToken } from "@/app/utils/types";
 import { any, boolean } from "zod";
 const token_password = process.env.NEXT_PUBLIC_TOKEN_PASSWORD as string;
-export function verifyToken(token: string): Jwtpaylod | null {
+export function verifyToken(token: string): UserToken | null {
   try {
     const decoded = jwt.verify(token, token_password);
-    return decoded as Jwtpaylod;
+    return decoded as UserToken;
   } catch (error) {
     console.error("Error verifying token:", error);
     return null;

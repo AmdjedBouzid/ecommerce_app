@@ -7,10 +7,16 @@ import connection from "@/app/config/db";
  * @description GET product by id
  * @access private
  */
-interface params {
+interface Params {
   id: number;
 }
-export async function GET(request: NextRequest, { params }: any) {
+
+export async function GET(
+  request: NextRequest,
+  { params }: { params: Params }
+) {
+  let db;
+
   try {
     if (!params.id) {
       return NextResponse.json(
@@ -19,20 +25,18 @@ export async function GET(request: NextRequest, { params }: any) {
       );
     }
 
-    const db = await connection.getConnection();
-    const [product]: any = await db.query(
-      "SELECT * FROM product WHERE id = ?",
-      [params.id]
-    );
-    db.release(); // Release the database connection
+    db = await connection.getConnection();
+    const [pro]: any = await db.query("SELECT * FROM product WHERE id = ?", [
+      params.id,
+    ]);
 
-    if (product.length === 0) {
+    if (pro.length === 0) {
       return NextResponse.json(
         { message: "Product not found" },
         { status: 404 }
       );
     }
-
+    const product = pro[0];
     return NextResponse.json({ product }, { status: 200 });
   } catch (error) {
     console.error("Error fetching product by ID:", error);
@@ -40,5 +44,9 @@ export async function GET(request: NextRequest, { params }: any) {
       { error: "Failed to fetch product" },
       { status: 500 }
     );
+  } finally {
+    if (db) {
+      db.release(); // Ensure the database connection is released
+    }
   }
 }

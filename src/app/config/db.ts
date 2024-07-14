@@ -5,6 +5,7 @@ const connection = mysql.createPool({
   user: "root",
   password: "",
   database: "myecommerce",
+  waitForConnections: true,
 });
 
 export default connection;

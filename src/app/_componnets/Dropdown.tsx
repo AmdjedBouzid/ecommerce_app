@@ -21,10 +21,10 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { User } from "@/app/utils/types";
+import { UserToken } from "@/app/utils/types";
 
 interface DropdownMenuDemoProps {
-  user: User | null;
+  user: UserToken | null;
   isLogedIn: boolean;
   handleLogout: () => void;
 }

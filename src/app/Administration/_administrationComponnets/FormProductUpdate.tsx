@@ -6,8 +6,7 @@ import { Flag } from "lucide-react";
 import styles from "./administration.module.css";
 import { CircleX } from "lucide-react";
 import Image from "next/image";
-import Id from "../../../../Nouveau dossier/next-ts-ecommerce-master/pages/order/[id]";
-import { string } from "zod";
+
 interface UmptiInputProps {
   response: { success: boolean; message: string };
 }

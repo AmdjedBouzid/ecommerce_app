@@ -1,5 +1,5 @@
 import Jwt from "jsonwebtoken";
-import { Jwtpaylod } from "@/app/utils/types";
+import { UserDetails, UserToken } from "@/app/utils/types";
 import { serialize } from "cookie";
 const cecret = process.env.SECRETJWTKEY as string;
 import { NextResponse } from "next/server";
@@ -8,7 +8,7 @@ if (!cecret) {
 }
 const token_password = process.env.NEXT_PUBLIC_TOKEN_PASSWORD as string;
 
-export function jeneratejwt(user: Jwtpaylod): string {
+export function jeneratejwt(user: UserToken): string {
   const token = Jwt.sign(user, token_password, {
     expiresIn: "20d",
   });

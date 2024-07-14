@@ -2,10 +2,13 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useAppContext } from "@/context/login";
 const AdminLeft = () => {
+  const { user, setUser, isLogedIn, setIsLogedIn } = useAppContext();
+
   return (
     <div
-      className="flex   flex-col justify-between bg-white sticky inset-x-0 bottom-0 border-t border-gray-100"
+      className="flex   flex-col justify-between bg-white sticky top-6 inset-x-0 bottom-0 border-t border-gray-100"
       style={{ width: "20%" }}
     >
       <div className="px-4 py-6">
@@ -34,15 +37,26 @@ const AdminLeft = () => {
               your store
             </Link>
           </li>
-
           <li>
             <Link
-              href="/Administration/Users"
+              href="/Administration/Requests"
               className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
             >
-              Users
+              Rquests
             </Link>
           </li>
+          {user?.IsSuperAdmin ? (
+            <li>
+              <Link
+                href="/Administration/Users"
+                className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+              >
+                Users
+              </Link>
+            </li>
+          ) : (
+            <></>
+          )}
 
           <li>
             <details className="group [&_summary::-webkit-details-marker]:hidden">

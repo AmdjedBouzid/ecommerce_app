@@ -29,16 +29,17 @@ export default function DropeDownNextUi({
           className="text-danger"
           color="danger"
           onClick={() => {
-            setcategory("All"), hunlelfilter("All");
+            setcategory("All");
+            hunlelfilter("All");
           }}
         >
           All
         </DropdownItem>
-        {categories.map((category) => (
+        {/* {categories.map((category) => (
           <DropdownItem key={category} onClick={() => hunlelfilter(category)}>
             {category}
           </DropdownItem>
-        ))}
+        ))} */}
       </DropdownMenu>
     </Dropdown>
   );

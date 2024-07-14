@@ -6,7 +6,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import jwt from "jsonwebtoken";
 import { useAppContext } from "@/context/login";
-import { UserDetails } from "../utils/types";
+import { UserDetails, UserToken } from "../utils/types";
 
 const Page = () => {
   const router = useRouter();
@@ -15,9 +15,9 @@ const Page = () => {
   if (user && isLogedIn) {
     router.push("/Products");
   }
-  useEffect(() => {
-    window.localStorage.setItem("user", JSON.stringify(user));
-  }, [user, isLogedIn]);
+  // useEffect(() => {
+  //   window.localStorage.setItem("user", JSON.stringify(user));
+  // }, [user, isLogedIn]);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -37,14 +37,13 @@ const Page = () => {
 
       const response = await axios.post(`${DOMAIN}/api/users/login`, data);
       if (response.status === 200) {
+        router.push("/Products");
         localStorage.setItem("Token", response.data.token);
         const userDet = response.data.UserReturn as UserDetails;
 
         setUser(userDet);
 
         setIsLogedIn(true);
-
-        router.push("/Products");
       }
     } catch (error) {
       console.error("Error logging in user:", error);

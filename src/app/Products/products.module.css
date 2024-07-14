@@ -1,0 +1,154 @@
+.productpage {
+  padding: 20px;
+  display: flex;
+  gap: 30px;
+  /* background-image: url(/bg4.jpg); */
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
+}
+.productcontainer {
+  height: auto;
+  width: 100%;
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+.productcard {
+  display: block;
+  border-radius: 0.5rem; /* rounded-lg */
+  padding: 1rem; /* p-4 */
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
+  width: 30%;
+  height: 380px;
+}
+.sideMenu {
+  position: sticky;
+  top: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #fff1f2; /* Equivalent to bg-pink-50 */
+  width: 13rem; /* Equivalent to w-52 */
+  margin-top: 1.25rem; /* Equivalent to mt-5 */
+}
+
+.sideMenuContent {
+  padding: 1.5rem 1rem; /* Equivalent to px-4 py-6 */
+}
+
+.sideMenuList {
+  margin-top: 1.5rem; /* Equivalent to mt-6 */
+  list-style-type: none; /* Remove bullet points */
+  padding: 0; /* Remove default padding */
+}
+
+.groupSummary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem; /* Equivalent to px-4 py-2 */
+  cursor: pointer;
+  color: #6b7280; /* Equivalent to text-gray-500 */
+  transition: color 0.3s;
+}
+
+.groupSummary:hover {
+  background-color: #f3f4f6; /* Equivalent to hover:bg-gray-100 */
+  color: #374151; /* Equivalent to hover:text-gray-700 */
+}
+
+.groupIcon {
+  transition: transform 0.3s;
+}
+
+.group[open] .groupIcon {
+  transform: rotate(180deg);
+}
+
+.groupSubmenu {
+  margin-top: 0.5rem; /* Equivalent to mt-2 */
+  padding-left: 1rem; /* Equivalent to px-4 */
+}
+
+.submenuItem {
+  display: block;
+  padding: 0.5rem 1rem; /* Equivalent to px-4 py-2 */
+  color: #6b7280; /* Equivalent to text-gray-500 */
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.submenuItem:hover {
+  background-color: #f3f4f6; /* Equivalent to hover:bg-gray-100 */
+  color: #374151; /* Equivalent to hover:text-gray-700 */
+}
+
+.menuItem {
+  display: block;
+  padding: 0.5rem 1rem; /* Equivalent to px-4 py-2 */
+  color: #6b7280; /* Equivalent to text-gray-500 */
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.menuItem:hover {
+  background-color: #f3f4f6; /* Equivalent to hover:bg-gray-100 */
+  color: #374151; /* Equivalent to hover:text-gray-700 */
+}
+
+.button {
+  width: 100%; /* Equivalent to w-full */
+  text-align: inherit; /* Equivalent to [text-align:_inherit] */
+}
+
+.sideMenuFooter {
+  border-top: 1px solid #f3f4f6; /* Equivalent to border-t border-gray-100 */
+}
+
+.footerLink {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* Equivalent to gap-2 */
+  padding: 1rem; /* Equivalent to p-4 */
+  background-color: #fff1f2; /* Equivalent to bg-pink-50 */
+  transition: background-color 0.3s;
+}
+
+.footerLink:hover {
+  background-color: #f3f4f6; /* Equivalent to hover:bg-gray-50 */
+}
+
+.footerLinkImage {
+  height: 2.5rem; /* Equivalent to h-10 */
+  width: 2.5rem; /* Equivalent to w-10 */
+  border-radius: 9999px; /* Equivalent to rounded-full */
+  object-fit: cover;
+}
+
+.HeaderFpone {
+  display: none;
+  background-color: aqua;
+  height: 60px;
+  width: 100%;
+  position: sticky;
+  top: 60px;
+}
+.ProductHeader {
+  margin-left: 20px;
+  background-image: url(/background.jpg);
+  background-position: center;
+  /* background-attachment: fixed; */
+  background-size: cover;
+  margin-bottom: 40px;
+}
+@media (max-width: 640px) {
+  .productcard {
+    width: 100%; /* sm:w-full */
+  }
+  .sideMenu {
+    display: none;
+  }
+  .HeaderFpone {
+    display: block;
+  }
+}

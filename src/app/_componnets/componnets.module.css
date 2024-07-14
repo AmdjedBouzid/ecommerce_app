@@ -47,6 +47,10 @@
 .buttonRow:hover {
   background-color: gray;
 }
+.DropdownItem {
+  display: flex;
+  justify-content: start;
+}
 @media only screen and (max-width: 600px) {
   .card {
     width: 95%;

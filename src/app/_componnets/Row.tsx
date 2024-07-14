@@ -22,9 +22,10 @@ interface RowProps {
 
 const Row: React.FC<RowProps> = ({ product, onDelete, onUpdate }) => {
   const [isspinner, Setisspinner] = useState<boolean>(false);
-  const token = window.localStorage.getItem("Token");
+
   const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN1;
   const HundlerDelete = async (id: number) => {
+    const token = window.localStorage.getItem("Token");
     try {
       Setisspinner(true);
       const response = await axios.delete(

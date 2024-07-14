@@ -4,7 +4,7 @@ import AdminLeft from "./AdminLeft";
 import AdminLeftPhone from "./AdminLeftPhone";
 import { verifyToken } from "@/app/utils/verifyToken";
 import { redirect } from "next/navigation";
-import { Jwtpaylod } from "../utils/types";
+import { UserToken } from "../utils/types";
 import jwt from "jsonwebtoken";
 interface AdminProps {
   children: React.ReactNode;

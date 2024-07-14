@@ -6,7 +6,7 @@ import { json } from "stream/consumers";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useAppContext } from "@/context/login";
-import { UserDetails } from "../utils/types";
+import { UserDetails, UserToken } from "../utils/types";
 const Page = () => {
   const router = useRouter();
   const [username, setusername] = useState("");
@@ -32,14 +32,13 @@ const Page = () => {
       if (response.status === 200) {
         const response = await axios.post(`${DOMAIN}/api/users/login`, data);
         if (response.status === 200) {
+          router.push("/Products");
           localStorage.setItem("Token", response.data.token);
           const userDet = response.data.UserReturn as UserDetails;
 
           setUser(userDet);
 
           setIsLogedIn(true);
-
-          router.push("/Products");
         }
       } else {
         toast.error("Failed to register");

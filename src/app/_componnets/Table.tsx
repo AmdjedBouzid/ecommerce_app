@@ -8,7 +8,8 @@ import { Input } from "@nextui-org/react";
 import DropeDownNextUi from "./DropeDownNextUi";
 import { useAppContext } from "@/context/login";
 import DropDownNextUISearch from "./DropDownNextUISearch";
-import Product from "../../../Nouveau dossier/next-ts-ecommerce-master/models/Product";
+
+import InputSearche from "./InputSearche";
 interface Product {
   id: number;
   name: string;
@@ -36,14 +37,24 @@ const Table = () => {
   console.log(SearcheBy);
   const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN1;
   const fetchProducts = async () => {
+    var token: string;
+    if (typeof window === undefined) {
+      token = "";
+    } else {
+      token = window?.localStorage?.getItem("Token") as string;
+    }
     try {
-      const response = await fetch(`${DOMAIN}/api/products`);
+      const response = await fetch(`http://localhost:3000/api/products/all`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       if (response.ok) {
         const data = await response.json();
         setProducts(data.products);
         console.log("Fetched products:", data.products);
       } else {
-        console.log("Failed to get products");
+        console.log("Failed to get products", response.body);
       }
     } catch (error) {
       console.error("Error fetching products:", error);
@@ -52,10 +63,11 @@ const Table = () => {
 
   useEffect(() => {
     fetchProducts();
-  }, []);
+  }, [products]);
   const [filterProduct, SetFilterProduct] = useState<Product[]>();
   const handleDelete = (id: number) => {
     setProducts(products.filter((product) => product.id !== id));
+    SetFilterProduct(filterProduct?.filter((product) => product.id !== id));
   };
 
   const handleUpdateClick = (product: Product) => {
@@ -73,6 +85,12 @@ const Table = () => {
         product.id === updatedProduct.id ? updatedProduct : product
       )
     );
+    SetFilterProduct(
+      filterProduct?.map((product) =>
+        product.id === updatedProduct.id ? updatedProduct : product
+      )
+    );
+
     setShowUpdateForm(false);
     setSelectedProduct(null);
   };
@@ -87,19 +105,17 @@ const Table = () => {
     SetFilterProduct(filtered);
   };
   const HundlerInputChage = (e: React.ChangeEvent<HTMLInputElement>) => {
-    SetSearchInput(e.target.value);
-    // if (category === "All") {
-    //   SetFilterProduct(products.filter((p) => true));
-    //   console.log("filtred", filterProduct);
-    // }
-    // var filtred2 = filterProduct as Product[];
+    const newSearch = e.target.value;
+    SetSearchInput(newSearch);
+    setcategory("All");
+    SetFilterProduct([]);
     // if (SearcheBy === "NAME") {
-    //   SetFilterProduct(filtred2.filter((p) => p.name.includes(SearchInput)));
-    //   console.log(filterProduct);
-    // }
-    // if (SearcheBy === "PRICE") {
-    //   SetFilterProduct(
-    //     filtred2.filter((p) => p.price === parseFloat(SearchInput))
+    //   setProducts(
+    //     products.filter((product) => {
+    //       return SearchInput === " "
+    //         ? product
+    //         : product.name.toLowerCase().includes(SearchInput);
+    //     })
     //   );
     // }
   };
@@ -124,14 +140,18 @@ const Table = () => {
           className="flex  flex-nowrap md:flex-nowrap "
           style={{ alignItems: "center" }}
         >
-          <Input
+          {/* <Input
             type="email"
             label="Searche"
             style={{ height: "30px", display: "flex", justifyContent: "end" }}
             value={SearchInput}
             onChange={HundlerInputChage}
+          /> */}
+
+          <InputSearche
+            NameSearche={SearchInput}
+            setChange={HundlerInputChage}
           />
-          <DropDownNextUISearch SetSearcheBy={SetSearcheBy} />
         </div>
       </div>
       {showUpdateForm && selectedProduct && (
@@ -166,14 +186,21 @@ const Table = () => {
           filterProduct === undefined ||
           filterProduct.length === 0
             ? Array.isArray(products) &&
-              products.map((product) => (
-                <Row
-                  key={product.id}
-                  product={product}
-                  onDelete={handleDelete}
-                  onUpdate={handleUpdateClick}
-                />
-              ))
+              SearcheBy === "NAME" &&
+              products
+                .filter((product) => {
+                  return SearchInput === ""
+                    ? product
+                    : product.name.toLowerCase().includes(SearchInput);
+                })
+                .map((product) => (
+                  <Row
+                    key={product.id}
+                    product={product}
+                    onDelete={handleDelete}
+                    onUpdate={handleUpdateClick}
+                  />
+                ))
             : Array.isArray(filterProduct) &&
               filterProduct.map((product) => (
                 <Row

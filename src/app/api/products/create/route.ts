@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import connection from "@/app/config/db";
-import { Jwtpaylod } from "@/app/utils/types";
+import { UserDetails, UserToken } from "@/app/utils/types";
 import { verifyToken } from "@/app/utils/verifyToken";
 import jwt from "jsonwebtoken";
 /**
@@ -10,8 +10,9 @@ import jwt from "jsonwebtoken";
  * @access public
  */
 export async function POST(request: NextRequest) {
+  var db;
   try {
-    const db = await connection.getConnection();
+    db = await connection.getConnection();
     const body = await request.json();
 
     const authHeader = request.headers.get("Authorization");
@@ -22,7 +23,7 @@ export async function POST(request: NextRequest) {
       );
     }
     const token = authHeader.split(" ")[1];
-    const decoded = jwt.verify(token, "amdjedamdjed05062004") as Jwtpaylod;
+    const decoded = jwt.verify(token, "amdjedamdjed05062004") as UserToken;
     if (decoded.isAdmin === false) {
       return NextResponse.json(
         { message: " you are not admin" },
@@ -57,7 +58,7 @@ export async function POST(request: NextRequest) {
         `UPDATE product SET counter = counter + ?, price = ? WHERE name = ? AND description = ? AND img = ? AND category = ?`,
         [counter, price, name, description, img, category]
       );
-
+      db.release();
       return NextResponse.json(
         {
           message: "Product updated successfully",
@@ -83,5 +84,7 @@ export async function POST(request: NextRequest) {
       { message: "Internal server error" },
       { status: 500 }
     );
+  } finally {
+    db?.release();
   }
 }
