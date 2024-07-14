@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useState } from "react";
 import { ShoppingCart } from "lucide-react";
 import ProductHeader from "./ProductHeader";
@@ -6,6 +7,8 @@ import HeaderFpone from "./HeaderFpone";
 import { Pagination } from "@nextui-org/react";
 import { useAppContext } from "@/context/login";
 import axios from "axios";
+import { DevBundlerService } from "next/dist/server/lib/dev-bundler-service";
+import connection from "@/app/config/db";
 
 function ProductSection() {
   const {
@@ -15,6 +18,7 @@ function ProductSection() {
     setProductsPagination,
     setCategoryProduct,
     categoryProduct,
+    products,
   } = useAppContext();
 
   const FetchNumbrOfProducts = async () => {
@@ -46,9 +50,9 @@ function ProductSection() {
   };
 
   useEffect(() => {
-    FetchNumbrOfProducts();
+    SetNumbrOfProducts(products.length);
     FetchProductForPagination(1);
-  }, []);
+  }, [products]);
 
   return (
     <div className="p-6">
