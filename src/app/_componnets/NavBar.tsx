@@ -128,7 +128,7 @@ export default function NavBar() {
       token = window?.localStorage?.getItem("Token") as string;
     }
     try {
-      const response = await fetch(`http://localhost:3000/api/products/all`, {
+      const response = await fetch(`${DOMAIN}/api/products/all`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

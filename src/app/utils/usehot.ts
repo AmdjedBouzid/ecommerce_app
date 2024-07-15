@@ -8,7 +8,7 @@ import { UserToken, UserDetails } from "./types";
 //   const router = useRouter();
 //   const [isLogedIn, setIsLogedIn] = useState(false);
 //   const [user, setUser] = useState<User | null>(null);
-//   const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN1;
+
 //   const getUserDetails = async () => {
 //     const token = window.localStorage.getItem("Token");
 
@@ -47,6 +47,7 @@ import { UserToken, UserDetails } from "./types";
 // };
 
 import { useAppContext } from "@/context/login";
+import { DOMAIN } from "./constants";
 
 const useFetchUser = () => {
   const { setUser, setIsLogedIn } = useAppContext();
@@ -61,7 +62,6 @@ const useFetchUser = () => {
       }
 
       try {
-        const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN1;
         const response = await axios.get(`${DOMAIN}/api/users/me`, {
           headers: {
             Authorization: `Bearer ${token}`,
