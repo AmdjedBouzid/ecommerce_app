@@ -7,6 +7,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useAppContext } from "@/context/login";
 import { UserDetails, UserToken } from "../utils/types";
+import { DOMAIN } from "../utils/constants";
 const Page = () => {
   const router = useRouter();
   const [username, setusername] = useState("");
@@ -27,15 +28,9 @@ const Page = () => {
         password: password,
       };
 
-      const response = await axios.post(
-        `https://vercel.com/amdjedbouzids-projects/ecommerce-app/api/users/regester`,
-        data
-      );
+      const response = await axios.post(`${DOMAIN}/api/users/regester`, data);
       if (response.status === 200) {
-        const response = await axios.post(
-          `https://vercel.com/amdjedbouzids-projects/ecommerce-app/api/users/login`,
-          data
-        );
+        const response = await axios.post(`${DOMAIN}/api/users/login`, data);
         if (response.status === 200) {
           router.push("/Products");
           localStorage.setItem("Token", response.data.token);
