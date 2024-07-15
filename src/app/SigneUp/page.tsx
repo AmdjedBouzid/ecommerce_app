@@ -28,9 +28,15 @@ const Page = () => {
       };
       const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN1;
 
-      const response = await axios.post(`${DOMAIN}/api/users/regester`, data);
+      const response = await axios.post(
+        `https://vercel.com/amdjedbouzids-projects/ecommerce-app/api/users/regester`,
+        data
+      );
       if (response.status === 200) {
-        const response = await axios.post(`${DOMAIN}/api/users/login`, data);
+        const response = await axios.post(
+          `https://vercel.com/amdjedbouzids-projects/ecommerce-app/api/users/login`,
+          data
+        );
         if (response.status === 200) {
           router.push("/Products");
           localStorage.setItem("Token", response.data.token);
