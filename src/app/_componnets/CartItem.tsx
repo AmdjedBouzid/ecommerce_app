@@ -6,6 +6,7 @@ import { Product } from "../utils/types";
 import axios from "axios";
 import { useAppContext } from "@/context/login";
 import { toast } from "react-toastify";
+import { DOMAIN } from "../utils/constants";
 interface CartoshopeItemProps {
   product: Product;
 }
@@ -15,7 +16,6 @@ function CartItem({ product }: CartoshopeItemProps) {
   const [DeleteFaforateSpinner, SetDeleteFaforateSpinner] = useState(false);
   const HUNDLERDELETEFAVORATE = async (id: number) => {
     const Token = window.localStorage.getItem("Token");
-    const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN1;
 
     try {
       SetDeleteFaforateSpinner(true);

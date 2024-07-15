@@ -27,6 +27,7 @@ import {
 } from "@nextui-org/react";
 import ShopeIcon from "./ShopeIcon";
 import CartFavorate from "./CartFavorate";
+import { DOMAIN } from "../utils/constants";
 export default function NavBar() {
   useFetchUser();
   const router = useRouter();
@@ -50,7 +51,7 @@ export default function NavBar() {
   //   }
 
   //   try {
-  //     const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN1;
+  //
   //     const response = await axios.get(`${DOMAIN}/api/users/me`, {
   //       headers: {
   //         Authorization: `Bearer ${token}`,
@@ -80,7 +81,6 @@ export default function NavBar() {
   };
   const fetchToshopeProducts = async () => {
     try {
-      const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN1;
       const Token = window.localStorage.getItem("Token");
       const response = await axios.get(`${DOMAIN}/api/addtotoshopeliste`, {
         headers: {
@@ -105,7 +105,6 @@ export default function NavBar() {
       token = window?.localStorage?.getItem("Token") as string;
     }
     try {
-      const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN1;
       const response = await axios.get(`${DOMAIN}/api/users/all`, {
         headers: {
           Authorization: `Bearer ${token}`,

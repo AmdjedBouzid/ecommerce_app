@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { Product } from "../utils/types";
+import { DOMAIN } from "../utils/constants";
 
 function CartDetailes() {
   const router = useRouter();
@@ -36,7 +37,7 @@ function CartDetailes() {
     try {
       SetDeleteFaforateSpinner(true);
       const Token = window.localStorage.getItem("Token");
-      const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN1;
+
       const response = await axios.post(
         `${DOMAIN}/api/products/buy`,
         {

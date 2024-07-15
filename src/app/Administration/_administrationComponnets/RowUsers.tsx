@@ -11,12 +11,13 @@ import { Spinner } from "@nextui-org/spinner";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { json } from "stream/consumers";
+import { DOMAIN } from "@/app/utils/constants";
 interface RowUserProps {
   user: UserDetails;
 }
 function RowUsers({ user }: RowUserProps) {
   const { Users, setUsers } = useAppContext();
-  const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN1;
+
   const token = window?.localStorage?.getItem("Token") as string;
   const [IsSpinner, SetIsSpinner] = useState(false);
   const [IsSpinner2, SetIsSpinner2] = useState(false);

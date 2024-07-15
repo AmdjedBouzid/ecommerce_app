@@ -16,10 +16,10 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import { toast } from "react-toastify";
 import useFetchUser from "@/app/utils/usehot";
+import { DOMAIN } from "../utils/constants";
 const Page = () => {
   const router = useRouter();
   const { user, setUser, isLogedIn, setIsLogedIn } = useAppContext();
-  const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN1;
 
   const handleLogout = () => {
     router.push("/Login");

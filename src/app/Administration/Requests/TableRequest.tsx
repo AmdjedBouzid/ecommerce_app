@@ -4,6 +4,7 @@ import RowRequest from "./RowRequest";
 import axios from "axios";
 import { useAppContext } from "@/context/login";
 import { RorR, request } from "@/app/utils/types";
+import { DOMAIN } from "@/app/utils/constants";
 
 function TableRequest() {
   const {
@@ -20,7 +21,6 @@ function TableRequest() {
 
   const fetchRequests = async () => {
     try {
-      const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN1;
       const Token = window.localStorage.getItem("Token");
       const response = await axios.get(`${DOMAIN}/api/products/getrequestes`, {
         headers: {

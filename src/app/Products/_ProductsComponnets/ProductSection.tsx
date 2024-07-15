@@ -9,6 +9,7 @@ import { useAppContext } from "@/context/login";
 import axios from "axios";
 import { DevBundlerService } from "next/dist/server/lib/dev-bundler-service";
 import connection from "@/app/config/db";
+import { DOMAIN } from "@/app/utils/constants";
 
 function ProductSection() {
   const {
@@ -23,10 +24,7 @@ function ProductSection() {
 
   const FetchNumbrOfProducts = async () => {
     try {
-      const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN1;
-      const response = await axios.get(
-        `https://vercel.com/amdjedbouzids-projects/ecommerce-app/api/products/number`
-      );
+      const response = await axios.get(`${DOMAIN}/api/products/number`);
       if (response.status === 200) {
         SetNumbrOfProducts(response.data.numberOfProducts);
       }
@@ -37,9 +35,8 @@ function ProductSection() {
 
   const FetchProductForPagination = async (page: number) => {
     try {
-      const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN1;
       const response = await axios.get(
-        `https://vercel.com/amdjedbouzids-projects/ecommerce-app/api/products/pagination?pagenumber=${
+        `${DOMAIN}/api/products/pagination?pagenumber=${
           page - 1
         }&category=${categoryProduct}`
       );

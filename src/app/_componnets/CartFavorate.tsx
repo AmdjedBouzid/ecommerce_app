@@ -3,13 +3,13 @@ import CartItemFav from "./CartItemFav";
 import { Product } from "../utils/types";
 import axios from "axios";
 import { useAppContext } from "@/context/login";
+import { DOMAIN } from "../utils/constants";
 
 function CartFavorate() {
   const { ProductFav, SetProductFav } = useAppContext();
 
   const FetchFavorateProducts = async () => {
     try {
-      const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN1;
       const Token = window.localStorage.getItem("Token");
       const response = await axios.get(`${DOMAIN}/api/products/favorateliste`, {
         headers: {

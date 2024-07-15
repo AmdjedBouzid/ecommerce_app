@@ -6,6 +6,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { Spinner } from "@nextui-org/spinner";
 import { useRouter } from "next/navigation";
+import { DOMAIN } from "../utils/constants";
 interface CartDetailesProps {
   product: Product;
 }
@@ -63,7 +64,6 @@ function CarteDetaillesItem({ product }: CartDetailesProps) {
   const [DeleteFaforateSpinner, SetDeleteFaforateSpinner] = useState(false);
   const HUNDLERDELETEFAVORATE = async (id: number) => {
     const Token = window.localStorage.getItem("Token");
-    const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN1;
 
     try {
       SetDeleteFaforateSpinner(true);

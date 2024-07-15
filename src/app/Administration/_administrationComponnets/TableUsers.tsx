@@ -5,12 +5,11 @@ import { useAppContext } from "@/context/login";
 import axios from "axios";
 import { UserDetails, UserToken } from "@/app/utils/types";
 import InputSearche from "./InputSearche";
+import { DOMAIN } from "@/app/utils/constants";
 
 function TableUsers() {
   const { Users, setUsers, InputSearchUsers, SearcheUserBy, SetSearcheUserBy } =
     useAppContext();
-
-  const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN1;
 
   const FetchUsers = async () => {
     var token: string;

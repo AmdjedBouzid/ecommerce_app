@@ -4,6 +4,7 @@ import styles from "@/app/_componnets/componnets.module.css";
 import Image from "next/image";
 import axios from "axios";
 import { Spinner, spinner } from "@nextui-org/react";
+import { DOMAIN } from "../utils/constants";
 interface Product {
   id: number;
   name: string;
@@ -23,7 +24,6 @@ interface RowProps {
 const Row: React.FC<RowProps> = ({ product, onDelete, onUpdate }) => {
   const [isspinner, Setisspinner] = useState<boolean>(false);
 
-  const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN1;
   const HundlerDelete = async (id: number) => {
     const token = window.localStorage.getItem("Token");
     try {

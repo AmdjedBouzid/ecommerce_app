@@ -13,6 +13,7 @@ import { toast } from "react-toastify";
 
 import { useAppContext } from "@/context/login";
 import { HeartIcon } from "@/app/_componnets/HeartIcon";
+import { DOMAIN } from "@/app/utils/constants";
 interface ProductDetailsProps {
   params: {
     id: number;
@@ -30,7 +31,6 @@ const ProductDetails = ({ params }: ProductDetailsProps) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN1;
         const res = await fetch(`${DOMAIN}/api/products/${params.id}`);
         const data = await res.json();
         console.log(data.product);
@@ -42,7 +42,6 @@ const ProductDetails = ({ params }: ProductDetailsProps) => {
 
     const fetchProducts = async () => {
       try {
-        const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN1;
         const res = await fetch(`${DOMAIN}/api/products/all`);
         const data = await res.json();
         setProducts(data.products);
@@ -69,7 +68,6 @@ const ProductDetails = ({ params }: ProductDetailsProps) => {
   //   useState(false);
   const HundlerAddtoFavorate = async (id: number) => {
     const Token = window.localStorage.getItem("Token");
-    const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN1;
 
     try {
       Set_Add_To_favorate_Spinner(true);

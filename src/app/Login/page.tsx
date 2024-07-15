@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import jwt from "jsonwebtoken";
 import { useAppContext } from "@/context/login";
 import { UserDetails, UserToken } from "../utils/types";
+import { DOMAIN } from "../utils/constants";
 
 const Page = () => {
   const router = useRouter();
@@ -21,7 +22,6 @@ const Page = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN1;
 
   const LoginUser = async () => {
     if (password === "" || email === "") {

@@ -10,6 +10,7 @@ import { useAppContext } from "@/context/login";
 import DropDownNextUISearch from "./DropDownNextUISearch";
 
 import InputSearche from "./InputSearche";
+import { DOMAIN } from "../utils/constants";
 interface Product {
   id: number;
   name: string;
@@ -35,7 +36,7 @@ const Table = () => {
   const [SearcheBy, SetSearcheBy] = useState("NAME");
   const [SearchInput, SetSearchInput] = useState("");
   console.log(SearcheBy);
-  const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN1;
+
   const fetchProducts = async () => {
     var token: string;
     if (typeof window === undefined) {
@@ -44,7 +45,7 @@ const Table = () => {
       token = window?.localStorage?.getItem("Token") as string;
     }
     try {
-      const response = await fetch(`http://localhost:3000/api/products/all`, {
+      const response = await fetch(`${DOMAIN}/api/products/all`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

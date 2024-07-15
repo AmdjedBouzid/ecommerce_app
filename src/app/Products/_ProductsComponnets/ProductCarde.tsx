@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useState } from "react";
+import { DOMAIN } from "@/app/utils/constants";
 function ProductCarde({ product }: product) {
   const [Add_To_favorate_Spinner, Set_Add_To_favorate_Spinner] =
     useState(false);
@@ -18,7 +19,6 @@ function ProductCarde({ product }: product) {
   const description = " adipisicing elit. Illoculpa" as string;
   const HundlerAddtoFavorate = async (id: number) => {
     const Token = window.localStorage.getItem("Token");
-    const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN1;
 
     try {
       Set_Add_To_favorate_Spinner(true);

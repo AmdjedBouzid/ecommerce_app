@@ -6,6 +6,7 @@ import { Flag } from "lucide-react";
 import styles from "./administration.module.css";
 import { CircleX } from "lucide-react";
 import Image from "next/image";
+import { DOMAIN } from "@/app/utils/constants";
 
 interface UmptiInputProps {
   response: { success: boolean; message: string };
@@ -46,7 +47,7 @@ const FormProductUpdate: React.FC<FormProductUpdateProps> = ({
   const [displayResponse, setdisplyReponce] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const token = window.localStorage.getItem("Token");
-  const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN1;
+
   const onUpdateRequest = async (e: React.FormEvent) => {
     e.preventDefault();
     setdisplyReponce(true);

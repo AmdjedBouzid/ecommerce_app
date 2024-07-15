@@ -3,12 +3,12 @@ import CartItem from "./CartItem";
 import Link from "next/link";
 import { useAppContext } from "@/context/login";
 import axios from "axios";
+import { DOMAIN } from "../utils/constants";
 
 function Cart() {
   const { ProductToshope, SetProductToshope } = useAppContext();
   const fetchToshopeProducts = async () => {
     try {
-      const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN1;
       const Token = window.localStorage.getItem("Token");
       const response = await axios.get(`${DOMAIN}/api/addtotoshopeliste`, {
         headers: {

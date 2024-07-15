@@ -26,7 +26,6 @@ const Page = () => {
         email: emaile,
         password: password,
       };
-      const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN1;
 
       const response = await axios.post(
         `https://vercel.com/amdjedbouzids-projects/ecommerce-app/api/users/regester`,
