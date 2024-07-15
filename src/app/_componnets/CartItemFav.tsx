@@ -6,6 +6,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useAppContext } from "@/context/login";
 import { useRouter } from "next/navigation";
+import { DOMAIN } from "../utils/constants";
 interface CartItemFavProps {
   product: Product;
 }
@@ -17,7 +18,6 @@ const CartItemFav: React.FC<CartItemFavProps> = ({ product }) => {
   const [AddToSopeCard, SetAddToSopeCard] = useState(false);
   const HUNDLERDELETEFAVORATE = async (id: number) => {
     const Token = window.localStorage.getItem("Token");
-    const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN1;
 
     try {
       SetDeleteFaforateSpinner(true);
@@ -47,7 +47,6 @@ const CartItemFav: React.FC<CartItemFavProps> = ({ product }) => {
 
   const handleAddToCart = async (id: number) => {
     const Token = window.localStorage.getItem("Token");
-    const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN1;
 
     try {
       SetAddToSopeCard(true);
