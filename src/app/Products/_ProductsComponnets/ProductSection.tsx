@@ -24,7 +24,9 @@ function ProductSection() {
   const FetchNumbrOfProducts = async () => {
     try {
       const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN1;
-      const response = await axios.get(`${DOMAIN}/api/products/number`);
+      const response = await axios.get(
+        `https://vercel.com/amdjedbouzids-projects/ecommerce-app/api/products/number`
+      );
       if (response.status === 200) {
         SetNumbrOfProducts(response.data.numberOfProducts);
       }
@@ -37,7 +39,7 @@ function ProductSection() {
     try {
       const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN1;
       const response = await axios.get(
-        `${DOMAIN}/api/products/pagination?pagenumber=${
+        `https://vercel.com/amdjedbouzids-projects/ecommerce-app/api/products/pagination?pagenumber=${
           page - 1
         }&category=${categoryProduct}`
       );
